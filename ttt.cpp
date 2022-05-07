@@ -4,8 +4,9 @@
 
 using namespace std;
 
-bool reshuffleAndCheckGameOver(char board[3][3], int position, int turn);
+void reshuffle(char board[3][3], int position, int turn);
 void printBoard(char board[3][3]);
+
 int main() 
 {
 	char board[3][3] = {{'1','2','3'}, {'4','5','6'}, {'7','8','9'}};
@@ -15,20 +16,15 @@ int main()
 	while (i <= maxTurns) {
 		cout << "Enter move:";
 		cin >> position;
-		if (reshuffleAndCheckGameOver(board, position, i)) 
-		{
-			cout << "Game over!" << endl;
-			return -1;
-		}
+		reshuffle(board, position, i); 
 		i += 1;
 	}
 	cout << "Game over!" << endl;
 	return 0;
 }
 
-bool reshuffleAndCheckGameOver(char board[3][3], int position, int turn)
+void reshuffle(char board[3][3], int position, int turn)
 {
-	int winning_positions[8][3] = {{1,2,3},{4,5,6},{7,8,9},{1,4,7}, {2,5,8}, {3,6,9}, {1,5,9}, {3,5,7}};
 	int row, col;
 	if (position == 1 || position == 2 || position == 3)
 	{
@@ -61,25 +57,6 @@ bool reshuffleAndCheckGameOver(char board[3][3], int position, int turn)
 		board[row][col] = 'O';
 	}
 	printBoard(board);
-
-	
-	// check if valid
-	if (
-	    // horizontal wins
-	    (board[0][0] == board[0][1] & board[0][0] == board[0][2]) ||
-	    (board[1][0] == board[1][1] & board[1][0] == board[1][2]) ||
-   	    (board[2][0] == board[2][1] & board[2][0] == board[2][2]) ||
-	    // vertical wins
-	    (board[0][0] == board[1][0] & board[0][0] == board[2][0]) ||
-	    (board[0][1] == board[1][1] & board[0][1] == board[2][1]) ||
-	    (board[0][2] == board[1][2] & board[0][2] == board[2][2]) ||
-	    // diagonal wins
-	    (board[1][1] == board[0][0] & board[1][1] == board[2][2]) ||
-	    (board[1][1] == board[0][2] & board[1][1] == board[2][0]))
-	{
-		return true;
-	}
-	return false;
 }
 
 void printBoard(char board[3][3])
