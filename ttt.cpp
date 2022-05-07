@@ -9,10 +9,12 @@ void printBoard(char board[3][3]);
 
 int main() 
 {
+	// initialize tic tac toe board
 	char board[3][3] = {{'1','2','3'}, {'4','5','6'}, {'7','8','9'}};
 	int maxTurns = 9;
 	int i = 1;
 	int position;	
+ 	
 	while (i <= maxTurns) {
 		cout << "Enter move:";
 		cin >> position;
@@ -23,6 +25,7 @@ int main()
 	return 0;
 }
 
+// find row + col of user inputted position and mark either 'X' or 'O' depending on player
 void reshuffle(char board[3][3], int position, int turn)
 {
 	int row, col;
@@ -50,15 +53,16 @@ void reshuffle(char board[3][3], int position, int turn)
 	{
 		col = 2;
 	}
-	if (turn % 2 != 0) // odd turn - 1, 3, 5, 7, 9 
+	if (turn % 2 != 0) // odd turn is player 'X'  
 	{
 		board[row][col] = 'X';
-	} else { // even turn - 2, 4, 6, 8
+	} else { // even turn is player 'O'
 		board[row][col] = 'O';
 	}
 	printBoard(board);
 }
 
+// print board in required format
 void printBoard(char board[3][3])
 {
 	int row, col;
